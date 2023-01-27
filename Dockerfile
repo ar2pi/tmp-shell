@@ -12,8 +12,8 @@ RUN apt-get update -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=fa
     unzip \
     patch git \
     lsof net-tools iproute2 iputils-ping dnsutils traceroute nmap tcpdump netcat socat \
-    curl wget ftp openssh-client \
-    nano vim \
+    curl wget ftp openssh-client rsync \
+    nano vim less \
     jq \
     && rm -rf /var/lib/apt/lists/*
 
