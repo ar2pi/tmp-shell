@@ -1,11 +1,13 @@
 FROM debian:bullseye-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG YQ_VERSION=4.6.1
-ARG JLESS_VERSION=0.7.1
+ARG YQ_VERSION=4.30.8
+ARG JLESS_VERSION=0.8.0
+ARG KUBECTL_VERSION=1.26.1
 
 # install additional deb packages
 RUN apt-get update -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false && apt-get install -y \
+    libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev \
     gpg \
     unzip \
     lsof net-tools iproute2 iputils-ping dnsutils traceroute nmap tcpdump netcat socat \
@@ -31,6 +33,16 @@ RUN curl -ksL https://github.com/PaulJuliusMartinez/jless/releases/download/v${J
     && chmod +x /usr/bin/jless \
     && rm -f /tmp/jless* \
     && jless --version
+
+# install kubectl
+RUN curl -ksL https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /tmp/kubectl \
+    && curl -ksL https://dl.k8s.io/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl.sha256 -o /tmp/kubectl_checksum \
+    && checksum_matches=$(echo "$(cat /tmp/kubectl_checksum)  /tmp/kubectl" | sha256sum --check | grep "OK") \
+    && if [ $checksum_matches -eq 0 ]; then exit 1; fi \
+    && cp /tmp/kubectl /usr/local/bin/kubectl \
+    && chmod +x /usr/local/bin/kubectl \
+    && rm -f /tmp/kubectl* \
+    && kubectl version --client
 
 # install aws-cli
 RUN curl -ksL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscli-exe-linux-x86_64.zip \
