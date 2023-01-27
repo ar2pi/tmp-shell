@@ -10,6 +10,7 @@ RUN apt-get update -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=fa
     libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev \
     gpg \
     unzip \
+    patch git \
     lsof net-tools iproute2 iputils-ping dnsutils traceroute nmap tcpdump netcat socat \
     curl wget ftp openssh-client \
     nano vim \
