@@ -5,6 +5,9 @@
 ## Use
 
 ```sh
-docker pull ar2pi/sre-utils
+# locally
 docker run -it ar2pi/sre-utils /bin/bash
+
+# in a running k8s pod
+kubectl debug fooapp -it --image=ar2pi/sre-utils --share-processes --copy-to=fooapp-debug
 ```
