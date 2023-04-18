@@ -51,3 +51,5 @@ RUN curl -ksL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/a
     && /tmp/aws/install \
     && rm -rf /tmp/aws* \
     && aws --version
+    
+# @TODO: set user + default sleep command
