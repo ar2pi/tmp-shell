@@ -11,8 +11,9 @@ RUN apt-get update -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=fa
     gpg \
     unzip \
     patch git \
-    lsof net-tools iproute2 iputils-ping dnsutils traceroute nmap tcpdump netcat socat \
+    lsof net-tools telnet iproute2 iputils-ping dnsutils traceroute nmap tcpdump netcat socat \
     curl wget ftp openssh-client rsync \
+    postgresql-client mariadb-client \
     nano vim less \
     jq \
     && rm -rf /var/lib/apt/lists/*
@@ -51,5 +52,9 @@ RUN curl -ksL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/a
     && /tmp/aws/install \
     && rm -rf /tmp/aws* \
     && aws --version
-    
-# @TODO: set user + default sleep command
+
+RUN useradd -g root --uid=1000 --shell=/bin/bash tmp
+
+USER tmp
+
+CMD [ "/bin/bash", "-c", "--", "while true; do sleep 30; done;" ]
