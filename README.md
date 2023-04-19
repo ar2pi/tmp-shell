@@ -4,13 +4,18 @@
 
 ## Use
 
+Run locally
 ```sh
-# run locally
 docker run --rm -it ar2pi/tmp-shell /bin/bash
+```
 
-# run in a running k8s pod
+Run in an existing kubernetes pod
+```sh
 kubectl debug fooapp -it --image=ar2pi/tmp-shell --share-processes --copy-to=fooapp-debug
-# run as a new tmp pod
+```
+
+Run as a new kubernetes pod
+```sh
 kubectl run tmp-shell --restart=Never --rm -it --image ar2pi/tmp-shell -- /bin/bash
 # OR
 kubectl apply -f kubernetes/pod.yaml
