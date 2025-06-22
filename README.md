@@ -1,6 +1,6 @@
 # tmp shell
 
-- **Docker image:** [ar2pi/tmp-shell](https://hub.docker.com/repository/docker/ar2pi/tmp-shell)
+[Dockerhub](https://hub.docker.com/repository/docker/ar2pi/tmp-shell)
 
 ## Use
 

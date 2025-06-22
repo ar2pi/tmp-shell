@@ -1,17 +1,19 @@
-FROM debian:bullseye-slim
+FROM debian:stable-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG YQ_VERSION=4.30.8
-ARG JLESS_VERSION=0.8.0
-ARG KUBECTL_VERSION=1.26.1
+ARG YQ_VERSION=4.45.4           # https://github.com/mikefarah/yq/releases
+ARG JLESS_VERSION=0.9.0         # https://github.com/PaulJuliusMartinez/jless/releases
+ARG KUBECTL_VERSION=1.33.2      # https://kubernetes.io/releases/
 
 # install additional deb packages
 RUN apt-get update -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false && apt-get install -y \
     libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev \
+    linux-headers-generic \
+    bcc bpftrace \
     gpg \
     unzip \
     patch git \
-    lsof net-tools telnet iproute2 iputils-ping dnsutils traceroute nmap tcpdump netcat socat \
+    lsof net-tools telnet iproute2 iputils-ping dnsutils traceroute nmap tcpdump netcat-openbsd socat \
     curl wget ftp openssh-client rsync \
     postgresql-client mariadb-client \
     nano vim less \
