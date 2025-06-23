@@ -25,11 +25,8 @@ kubectl apply -f kubernetes/pod.yaml
 ## Build
 
 ```sh
-# amd64 (linux)
-docker build -t ar2pi/tmp-shell --platform linux/amd64 .
-docker push ar2pi/tmp-shell
-
-# arm64 (macos)
-docker build -f Dockerfile.arm64 -t ar2pi/tmp-shell:arm64 .
-docker push ar2pi/tmp-shell:arm64
+docker buildx build \
+  --platform linux/amd64,linux/arm64 \
+  -t ar2pi/tmp-shell:latest \
+  --push .
 ```
