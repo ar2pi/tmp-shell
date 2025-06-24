@@ -27,6 +27,6 @@ kubectl apply -f kubernetes/pod.yaml
 ```sh
 docker buildx build \
   --platform linux/amd64,linux/arm64 \
-  -t ar2pi/tmp-shell:latest \
+  -t ar2pi/tmp-shell \
   --push .
 ```
